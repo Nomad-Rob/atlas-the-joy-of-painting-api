@@ -1,39 +1,42 @@
--- Create the Episodes table if it doesn't exist
-CREATE TABLE IF NOT EXISTS Episodes (
-    EpisodeID SERIAL PRIMARY KEY,
-    Title VARCHAR(255) NOT NULL,
-    Season INT NOT NULL,
-    EpisodeNumber INT NOT NULL,
-    OriginalAirDate DATE NOT NULL
+CREATE DATABASE bob_ross_database;
+USE bob_ross_database;
+
+CREATE TABLE Paintings (
+    PaintingID SERIAL PRIMARY KEY,
+    Title VARCHAR(255),
+    Episode INT,
+    Season INT,
+    ImageURL TEXT,
+    VideoURL TEXT
 );
 
--- Create the Colors table if it doesn't exist
-CREATE TABLE IF NOT EXISTS Colors (
+CREATE TABLE Colors (
     ColorID SERIAL PRIMARY KEY,
-    Name VARCHAR(50) NOT NULL,
-    HexValue VARCHAR(7) NOT NULL
+    Name VARCHAR(255),
+    HexValue VARCHAR(7)
 );
 
--- Create the Subjects table if it doesn't exist
-CREATE TABLE IF NOT EXISTS Subjects (
+CREATE TABLE PaintingsColors (
+    PaintingID INT,
+    ColorID INT,
+    FOREIGN KEY (PaintingID) REFERENCES Paintings(PaintingID),
+    FOREIGN KEY (ColorID) REFERENCES Colors(ColorID)
+);
+
+CREATE TABLE Episodes (
+    EpisodeID SERIAL PRIMARY KEY,
+    Title VARCHAR(255),
+    AirDate DATE
+);
+
+CREATE TABLE Subjects (
     SubjectID SERIAL PRIMARY KEY,
-    Name VARCHAR(50) NOT NULL
+    Name VARCHAR(255)
 );
 
--- Create the EpisodeColors junction table if it doesn't exist
-CREATE TABLE IF NOT EXISTS EpisodeColors (
-    EpisodeID INT NOT NULL,
-    ColorID INT NOT NULL,
-    CONSTRAINT FK_EpisodeID FOREIGN KEY (EpisodeID) REFERENCES Episodes(EpisodeID) ON DELETE CASCADE,
-    CONSTRAINT FK_ColorID FOREIGN KEY (ColorID) REFERENCES Colors(ColorID) ON DELETE CASCADE,
-    PRIMARY KEY (EpisodeID, ColorID)
-);
-
--- Create the EpisodeSubjects junction table if it doesn't exist
-CREATE TABLE IF NOT EXISTS EpisodeSubjects (
-    EpisodeID INT NOT NULL,
-    SubjectID INT NOT NULL,
-    CONSTRAINT FK_EpisodeSubjectID FOREIGN KEY (EpisodeID) REFERENCES Episodes(EpisodeID) ON DELETE CASCADE,
-    CONSTRAINT FK_SubjectID FOREIGN KEY (SubjectID) REFERENCES Subjects(SubjectID) ON DELETE CASCADE,
-    PRIMARY KEY (EpisodeID, SubjectID)
+CREATE TABLE PaintingsSubjects (
+    PaintingID INT,
+    SubjectID INT,
+    FOREIGN KEY (PaintingID) REFERENCES Paintings(PaintingID),
+    FOREIGN KEY (SubjectID) REFERENCES Subjects(SubjectID)
 );
