@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
 
+# Basic packages
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -8,17 +9,18 @@ RUN apt-get update && apt-get install -y \
     emacs \
     locales \
     build-essential
+    
+# Install Node.js, npm, Python, and Postgres
+RUN apt-get update && \
+    apt-get install -y nodejs npm python3 python3-pip postgresql postgresql-contrib && \
+    npm install -g n && n stable && \
+    apt-get purge -y nodejs npm && \
+    apt-get clean
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
-
-# MongoDB
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | apt-key add -
-RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" > /etc/apt/sources.list.d/mongodb-org-4.2.list
-RUN mkdir -p /data/db
-RUN apt-get update
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/Los_Angeles
