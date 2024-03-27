@@ -13,7 +13,6 @@ This project aims to provide easy access to information about "The Joy of Painti
 ### Prerequisites
 
 
-
 ### Setup
 
 ## Database Design
