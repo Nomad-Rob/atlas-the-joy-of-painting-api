@@ -15,6 +15,33 @@ This project aims to provide easy access to information about "The Joy of Painti
 
 ### Setup
 
+## PgAdmin and Postgresql Setup
+
+1. Install PostgreSQL and PgAdmin
+2. Open PgAdmin and create a new server
+3. Create a new database called `BobRoss`
+4. Create a new user called `usernamehere` with password `passwordhere`
+5. Grant all privileges to the user `usernamehere` on the database `BobRoss`
+6. Start the server and connect to the database
+7. Run the SQL script `create_tables.sql` to create the tables
+8. Run the SQL script `insert_data.sql` to insert data into the tables
+
+Some commands for PostgreSQL in the CLI:
+
+- `service postgresql start` Start the PostgreSQL service
+- `service postgresql stop` Stop the PostgreSQL service
+- `service postgresql restart` Restart the PostgreSQL service
+- `sudo -u postgres psql` Access the PostgreSQL CLI
+- `\q`: Quit the PostgreSQL CLI
+- `\du`: List all users
+- `psql -U username -d database_name`: Connect to a database
+- `\l`: List all databases
+- `\c database_name`: Connect to a database
+- `\dt`: List all tables
+- `\d table_name`: Describe a table
+- `SELECT * FROM table_name;`: Show all rows in a table
+
+
 ## Database Design
 Structure of the DB using PostgreSQL
 
