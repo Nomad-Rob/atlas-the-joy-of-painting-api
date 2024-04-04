@@ -1,0 +1,13 @@
+# Default setting for all files
+[*]
+insert_final_newline = true
+
+# Specific setting for your three files
+[./data/colors.csv]
+insert_final_newline = false
+
+[./data/episodes.csv]
+insert_final_newline = false
+
+[./data/subjects.csv]
+insert_final_newline = false
